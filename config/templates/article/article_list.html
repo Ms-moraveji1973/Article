@@ -10,14 +10,14 @@
             <!-- Post preview-->
             {% for art in articles  %}
                 <div div class="post-preview">
-                <a href="post.html">
+                <a href="#">
                 <h2 class="post-title">{{ art.title }}</h2>
-                    <h3 class="post-subtitle">{{ art.description| }}</h3>
+                    <h3 class="post-subtitle">{{ art.description|truncatewords:"4" }}</h3>
                     </a>
                 <p class="post-meta">
                      Posted by
-                    <a href="#!">Start Bootstrap</a>
-                    on September 24, 2023
+                    <a href="#!">{{ art.auther }}</a>
+                    {{ art.date }}
                 </p>
                 </div>
             {% endfor %}
@@ -25,7 +25,7 @@
             <!-- Divider-->
             <hr class="my-4" />
             <!-- Pager-->
-            <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
+            <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Next Page →</a></div>
         </div>
     </div>
 </div>
