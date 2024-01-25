@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-
+{% load thumbnail %}
 {% block title %}
     Articles
 {% endblock %}
@@ -27,19 +27,24 @@
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
             <!-- Post preview-->
-            {% for art in articles  %}
-                <div div class="post-preview">
+            {% for art in articles %}
+            <div class="post-preview">
                 <a href="{% url 'ArticleDetail' slug=art.slug %}">
-                <h2 class="post-title">{{ art.title }}</h2>
-                    <h3 class="post-subtitle">{{ art.description|truncatewords:"4" }}</h3>
-                    </a>
-                <p class="post-meta">
-                     Posted by
-                    <a href="#!">{{ art.auther }}</a>
-                    {{ art.date }}
-                </p>
-                </div>
-            {% endfor %}
+                    {% thumbnail art.image "200x100" quality=75 crop='center' as im %}
+                    <img src="{{ im.url }}" class="thumbnail-image">
+                    {% endthumbnail %}
+        
+                    <div class="post-content">
+                        <h2 class="post-title">{{ art.title }}</h2>
+                        <p class="post-subtitle">{{ art.description|truncatewords:"3" }}</p>
+                        <p class="post-meta"> Posted by <a href="#!"> {{ art.auther }} </a> {{ art.date }} </p>
+                    </div>
+                </a>
+            </div>
+            <br>
+            
+        {% endfor %}
+        
 
             <!-- Divider-->
             <hr class="my-4" />

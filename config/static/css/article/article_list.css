@@ -1,0 +1,8 @@
+.thumbnail-image {
+    float: left; /* جابه‌جایی به سمت چپ با استفاده از float */
+    margin-right: 10px; /* حاشیه‌ی راست برای جلوگیری از اتصال به متن */
+}
+
+.post-content {
+    overflow: hidden; /* جلوگیری از اتصال به تصویر */
+}
