@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+{% load thumbnail %}
+
+{% block title %} Article Detail {% endblock %}
+
+{% block header %}
+{% with image_url=detail.image.url %}
+    <header class="masthead" style="background-image: url('{{ image_url }}')">
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div class="site-heading">
+                        <h1>{{ detail.title }}</h1>
+                        <span class="meta">
+                            Posted by
+                            <a href="">{{ detail.auther }}</a>
+                           {{ detail.date }}
+                        </span>                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endwith %}
+
+
+{% endblock header %}
+
+{% block content %}
+    <!-- Post Content-->
+    <article class="mb-4">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                   
+                    <h2 class="section-heading">{{ article_detail.title }}</h2>
+                    <p>{{ detail.description }} </p>
+                    <blockquote class="blockquote"></blockquote>
+                        {% thumbnail detail.image "862x398" quality=75 crop='center' as im %}
+                             <img src="{{ im.url }}">
+                        {% endthumbnail %}
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+{% endblock  %}
