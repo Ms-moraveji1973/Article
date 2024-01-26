@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
+
+
+
 class Article(models.Model):
     title = models.CharField(max_length=250 , verbose_name='عنوان مقاله')
     slug = models.SlugField(max_length=400 , db_index=True ,allow_unicode=True , verbose_name='ادرس مقاله')
