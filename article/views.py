@@ -5,6 +5,7 @@ from .models import Article
 
 class ArticleList(ListView):
     model = Article
+    paginate_by = 1
     template_name = 'artilce/article_list.html'
     context_object_name = 'articles'
 
