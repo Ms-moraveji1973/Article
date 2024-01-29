@@ -8,7 +8,7 @@ class Article(models.Model):
     title = models.CharField(max_length=250 , verbose_name='عنوان مقاله')
     slug = models.SlugField(max_length=400 , db_index=True ,allow_unicode=True , verbose_name='ادرس مقاله')
     description = models.TextField(verbose_name='توضیح مقاله')
-    image = models.ImageField(upload_to='articles')
+    image = models.ImageField(upload_to='عکس مقاله')
     is_active = models.BooleanField(default=True , verbose_name='قعال / غیر فعال')
     date = models.DateTimeField(auto_now_add=True , editable=False , verbose_name='تاریخ ایجاد مقاله')
     auther = models.ForeignKey(User , on_delete=models.CASCADE ,null=True, verbose_name='نویسنده')
