@@ -38,12 +38,20 @@
                         <h2 class="post-title">{{ art.title }}</h2>
                         <p class="post-subtitle">{{ art.description|truncatewords:"3" }}</p>
                         <p class="post-meta"> Posted by <a href="#!"> {{ art.auther }} </a> {{ art.date }} </p>
+                        <h3>
+                           {% for cat in art.category.all %}
+                           	{{ cat.title }}
+                           {% endfor %}
+                           
+                            
+                        </h3>
                     </div>
                 </a>
             </div>
             <br>
             
-        {% endfor %}
+            {% endfor %}
+        
         
 
             <!-- Divider-->

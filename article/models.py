@@ -31,3 +31,4 @@ class Article(models.Model):
     class Meta:
         verbose_name = ' مقاله'
         verbose_name_plural = 'مقاله ها'
+        ordering = ['-date']

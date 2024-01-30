@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load poll_extras %}
 <!DOCTYPE html>
 
 <html lang="en">
@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>{% block title %}{% endblock  %}</title>
+        <title>{% block title %}{% endblock  %} </title>
         <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -27,14 +27,7 @@
                     Menu
                     <i class="fas fa-bars"></i>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href=" {% url 'ArticleList' %}">Home</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="#">About</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="#">Sample Post</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="#">Contact</a></li>
-                    </ul>
-                </div>
+                {% category_navbar %}
             </div>
         </nav>
         <!-- Page Header-->
@@ -75,7 +68,7 @@
                                 </a>
                             </li>
                         </ul>
-                        <div class="small text-center text-muted fst-italic">Copyright &copy; Your Website 2023</div>
+                        <div class="small text-center text-muted fst-italic">This is site is for Muhamamd Sadegh Moraveji</div>
                     </div>
                 </div>
             </div>
