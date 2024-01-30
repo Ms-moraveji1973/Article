@@ -27,7 +27,7 @@
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
             <!-- Post preview-->
-            {% for art in articles %}
+            {% for art in category.articles_cat.published %}
             <div class="post-preview">
                 <a href="{% url 'ArticleDetail' slug=art.slug %}">
                     {% thumbnail art.image "200x100" quality=75 crop='center' as im %}
@@ -38,20 +38,18 @@
                         <h2 class="post-title">{{ art.title }}</h2>
                         <p class="post-subtitle">{{ art.description|truncatewords:"3" }}</p>
                         <p class="post-meta"> Posted by <a href="#!"> {{ art.auther }} </a> {{ art.date }} </p>
-                        <h5>
+                        <div>
                            {% for cat in art.category_published.all %}
                                <a href="{% url 'category' slug=cat.slug %}">#{{ cat.title }}</a>
                            {% endfor %}
-
-
-                        </h5>
+                        </div>
                     </div>
                 </a>
             </div>
             <br>
             
             {% endfor %}
-
+        
         
 
             <!-- Divider-->

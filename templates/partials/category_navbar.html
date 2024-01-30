@@ -3,9 +3,8 @@
         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href=" {% url 'ArticleList' %}">Home</a></li>
         {% for cat in category  %}
             <li class="nav-item">
-                <a class="nav-link px-lg-3 py-3 py-lg-4" href="#">{{ cat.title }}</a>
+                <a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'category' slug=cat.slug %}">{{ cat.title }}</a>
             </li>
-
         {% endfor %}
     </ul>
 </div>
