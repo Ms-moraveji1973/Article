@@ -28,13 +28,13 @@ def category(request , slug):
     context = {
         "category" : get_object_or_404(Category, slug=slug , status=True)
     }
-    return render(request , "article/category.html" , context)
+    return render(request , "article/category_list.html" , context)
 
 
 # class base view for category
 class CategoryList(ListView):
     paginate_by = 2
-    template_name = "article/category.html"
+    template_name = "article/category_list.html"
         
     def get_queryset(self):
         global category

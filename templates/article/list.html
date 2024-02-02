@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+{% load thumbnail %}
+{% block title %}
+    Articles
+{% endblock %}
+
+
+{% block header %}        
+    {% include "article/include/article_header.html" %}
+{% endblock %}
+
+{% block content %}
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            {% block category_head %}{% endblock %}
+            <!-- Post preview-->
+
+            {% for article in object_list %}
+            <div class="post-preview">
+              <a href="{% url 'ArticleDetail' article.slug %}">
+                {% thumbnail article.image "200x100" quality=75 crop='center' as im %}
+                    <img src="{{ im.url }}" class="thumbnail-image">
+                {% endthumbnail %}
+                <h2 class="post-title">
+                  {{article.title}}
+                </h2>
+                <h3 class="post-subtitle">
+                  {{article.description|striptags|truncatewords:30}}
+                </h3>
+              </a>
+              <p class="post-meta">By
+                <a href="#">{{ article.auther }}</a>
+                {{article.date}}</p>
+              <div>
+                {% for cat in article.category.active %}
+                  <a href="{% url 'category' cat.slug %}">#{{cat.title}}</a>
+                {% endfor %}
+              </div>            
+            </div>
+            <hr>
+          {% endfor %}
+  
+  
+            <!-- Divider-->
+            <hr class="my-4" />
+            <!-- Pager-->
+            <div class="d-flex justify-content-end mb-4">
+                {% if page_obj.has_previous %}
+                    <a class="btn btn-primary text-uppercase mr-2" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                {% endif %}
+            
+                {% if page_obj.has_next %}
+                    <a class="btn btn-primary text-uppercase" href="?page={{ page_obj.next_page_number }}">Next</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock  %}
