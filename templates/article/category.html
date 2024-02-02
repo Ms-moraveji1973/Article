@@ -28,7 +28,7 @@
         <div class="col-md-10 col-lg-8 col-xl-7">
         <h3 class="alert alert-primary text-center"> Category : " {{ category.title }} " </h3>
             <!-- Post preview-->
-            {% for art in category.articles_cat.published %}
+            {% for art in object_list %}
             <div class="post-preview">
                 <a href="{% url 'ArticleDetail' slug=art.slug %}">
                     {% thumbnail art.image "200x100" quality=75 crop='center' as im %}
