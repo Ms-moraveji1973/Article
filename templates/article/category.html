@@ -26,6 +26,7 @@
 <div class="container px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
+        <h3 class="alert alert-primary text-center"> Category : " {{ category.title }} " </h3>
             <!-- Post preview-->
             {% for art in category.articles_cat.published %}
             <div class="post-preview">
@@ -37,7 +38,7 @@
                     <div class="post-content">
                         <h2 class="post-title">{{ art.title }}</h2>
                         <p class="post-subtitle">{{ art.description|truncatewords:"3" }}</p>
-                        <p class="post-meta"> Posted by <a href="#!"> {{ art.auther }} </a> {{ art.date }} </p>
+                        <p class="post-meta"> Posted by <a href="#!"> {{ art.auther }} </a>,Date:<time>{{ art.date }}</time></p>
                         <div>
                            {% for cat in art.category_published.all %}
                                <a href="{% url 'category' slug=cat.slug %}">#{{ cat.title }}</a>

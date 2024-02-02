@@ -6,7 +6,13 @@ class ArticleManager(models.Manager):
     def published(self):
         return self.filter(status=True)
 
+
+class CatagoryManager(models.Manager):
+    def active(self):
+        return self.filter(status=True)
+
 class Category(models.Model):
+    parent = models.ForeignKey('self',default=False , null=True , blank=True , on_delete=models.SET_NULL , related_name="children" , verbose_name="زیر دسته" )
     title = models.CharField(max_length=250 , verbose_name='عنوان دسته بندی')
     slug = models.SlugField(max_length=400 , db_index=True ,allow_unicode=True , verbose_name='ادرس دسته بندی')
     status = models.BooleanField(default=True , verbose_name='قعال / غیر فعال')
@@ -15,9 +21,12 @@ class Category(models.Model):
     class Meta:
         verbose_name = ' دسته بندی مقاله'
         verbose_name_plural = 'دسته بندی مقاله ها'
-        ordering = ['position']
+        ordering = ['parent__id' , 'position']
+        
     def __str__(self):
         return self.title
+    
+    objects = CatagoryManager()
 
 class Article(models.Model):
     title = models.CharField(max_length=250 , verbose_name='عنوان مقاله')

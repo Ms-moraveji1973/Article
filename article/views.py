@@ -11,7 +11,7 @@ class ArticleList(ListView):
     def get_context_data(self, **kwargs):
         context = super(ArticleList , self).get_context_data()
         context['articles'] = Article.objects.published()
-        context['category'] = Category.objects.published()
+        context['category'] = Category.objects.filter(status=True)
         return context
 
 

@@ -1,0 +1,62 @@
+.nav ul {
+    padding: 0;
+    list-style: none; /* حذف نقطه‌گذاری داخلی */
+    margin: 0; /* حذف حاشیه */
+}
+
+.nav ul li {
+    float: left;
+    position: relative; /* تنظیم موقعیت نسبی برای زیرمنوها */
+}
+
+.nav ul li a {
+    text-decoration: none;
+    color: #000000;
+    display: block;
+    padding: 0 24px;
+    line-height: 86px;
+    font-size: 14px;
+    transition: .3s background-color;
+}
+
+.nav ul li:hover > ul {
+    display: block;
+}
+
+.nav ul ul {
+    display: none;
+    position: absolute;
+    top: 100%; /* موقعیت زیرمنو بالاتر از المان مادر */
+    left: 0;
+    background-color: #ffffff; /* رنگ پس‌زمینه زیرمنو */
+    padding: 0;
+}
+
+.nav ul ul li {
+    width: 100%;
+}
+
+.nav ul ul li a {
+    line-height: 34px;
+}
+
+.nav ul ul ul {
+    position: absolute;
+    top: 0;
+    right: -100%; /* پنهان کردن زیرمنوهای سمت چپ */
+}
+
+.nav ul ul li:hover > ul {
+    display: block;
+}
+
+.nav ul li:hover > a {
+    background-color: #5c89c7;
+    color: #FFFFFF;
+}
+
+/* پاک کردن مرز از المان‌های لیست */
+.nav ul,
+.nav ul ul {
+    border: none;
+}

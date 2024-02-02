@@ -37,7 +37,7 @@
                     <div class="post-content">
                         <h2 class="post-title">{{ art.title }}</h2>
                         <p class="post-subtitle">{{ art.description|truncatewords:"3" }}</p>
-                        <p class="post-meta"> Posted by <a href="#!"> {{ art.auther }} </a> {{ art.date }} </p>
+                        <p class="post-meta"> Posted by <a href="#!"> {{ art.auther }} </a>,Date:<time>{{ art.date }}</time></p>
                         <h5>
                            {% for cat in art.category_published.all %}
                                <a href="{% url 'category' slug=cat.slug %}">#{{ cat.title }}</a>
@@ -48,7 +48,6 @@
                     </div>
                 </a>
             </div>
-            <br>
             
             {% endfor %}
 
