@@ -4,8 +4,8 @@ from .models import Article , Category
 # Create your views here.
 
 class ArticleList(ListView):
+    paginate_by = 2
     model = Article
-    paginate_by = 1
     template_name = 'artilce/article_list.html'
 
     def get_context_data(self, **kwargs):
@@ -21,6 +21,8 @@ class ArticleDetail(DetailView):
     template_name = "article/article_detail.html"
     context_object_name = 'detail'
     
+    
+    
 # function base view for category
 def category(request , slug):
     context = {
@@ -28,9 +30,10 @@ def category(request , slug):
     }
     return render(request , "article/category.html" , context)
 
+
 # class base view for category
 class CategoryList(ListView):
-    paginate_by = 1
+    paginate_by = 2
     template_name = "article/category.html"
         
     def get_queryset(self):
