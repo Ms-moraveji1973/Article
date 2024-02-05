@@ -19,7 +19,7 @@ class CategoryAdmin(admin.ModelAdmin):
 admin.site.register(Category , CategoryAdmin)
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('image_tag' ,'title' ,'slug' ,'status' , 'category_to_str')
+    list_display = ('image_tag' ,'title' ,'auther','slug' ,'status' , 'category_to_str')
     search_fields = ['title']
     prepopulated_fields = {'slug': ('title',)}
     ordering = ['-status']
@@ -27,7 +27,7 @@ class ArticleAdmin(admin.ModelAdmin):
 
 
     def category_to_str(self , obj):
-        return ". ".join([category.title for category in obj.active()])
+        return ". ".join([category.title for category in obj.category.active() ])
     category_to_str.short_description = 'دسته بندی'
 
 admin.site.register(Article , ArticleAdmin)

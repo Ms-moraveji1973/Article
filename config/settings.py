@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    #internal apps
     'article.templatetags',
     'article',
     'sorl.thumbnail',

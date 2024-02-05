@@ -31,7 +31,7 @@
                 </h3>
               </a>
               <p class="post-meta">By
-                <a href="#">{{ article.auther }}</a>
+                <a href="{% url 'author' username=article.auther %}">{{ article.auther }}</a>
                 {{article.date}}</p>
               <div>
                 {% for cat in article.category.active %}

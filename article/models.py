@@ -38,7 +38,7 @@ class Article(models.Model):
     image = models.ImageField(upload_to='articles')
     status = models.BooleanField(default=True , verbose_name='قعال / غیر فعال')
     date = models.DateTimeField(auto_now_add=True , editable=False , verbose_name='تاریخ ایجاد مقاله')
-    auther = models.ForeignKey(User , on_delete=models.CASCADE ,null=True, verbose_name='نویسنده')
+    auther = models.ForeignKey(User , on_delete=models.CASCADE ,null=True, related_name="articles_cat" , verbose_name='نویسنده')
 
 
     class Meta:
