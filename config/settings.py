@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_REDIRECT_URL = 'home'
+LOGIN_URL = 'login'
 
 # Application definition
 
@@ -37,10 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'article',
+    'account',
+
     
     #internal apps
     'article.templatetags',
-    'article',
     'sorl.thumbnail',
 ]
 
