@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     #internal apps
     'article.templatetags',
     'sorl.thumbnail',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

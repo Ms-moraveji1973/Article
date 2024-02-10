@@ -1,4 +1,5 @@
 {% load static %}
+{% load widget_tweaks %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,9 +8,23 @@
     <title>Login Page</title>
     <!-- اضافه کردن فایل CSS -->
     <link rel="stylesheet" href="{% static 'css/registration/login.css' %}">
+
     <style>
-        /* اینجا می‌توانید قسمت‌هایی از CSS را که نیاز به اضافه شدن به فایل دارند را قرار دهید */
+        .errors{
+            color: rgb(77, 174, 239);
+            background-color: rgba(0, 0, 0, 0.12);
+            padding:23px 30px;
+        }
     </style>
+
+    {% if form.non_field_errors %}
+    <div class="errors">
+        {% for error in form.non_field_errors  %}
+            <span>{{ error }} </span>
+        {% endfor %}
+    </div>
+    {% endif %}
+
 </head>
 <body>
     <section class="container">
@@ -19,11 +34,27 @@
                 <img src="https://raw.githubusercontent.com/hicodersofficial/glassmorphism-login-form/master/assets/illustration.png" alt="illustration" class="illustration" />
                 <h1 class="opacity">LOGIN</h1>
                 <form method="post">
-                {% csrf_token %}
+                    {% csrf_token %}
                     <label for="username">Username:</label>
-                    {{ form.username }}
+                    {{ form.username|add_class:"input100" }}
+                        {% if form.username.errors %}
+                        <div class="errors">
+                            {% for error in form.username.errors  %}
+                                <span>{{ error }} </span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+
                     <label for="password">Password:</label>
-                    {{ form.password }}
+                    {{ form.password|add_class:"input100" }}
+                        {% if form.password.errors %}
+                        <div class="errors">
+                            {% for error in form.password.errors  %}
+                                <span>{{ error }} </span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+
                     <button class="opacity">SUBMIT</button>
                 </form>
                 <div class="register-forget opacity">
