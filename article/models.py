@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.urls import reverse
+from account.models import User
 from django.utils.html import format_html
 
 # Create your models here.
@@ -49,9 +50,17 @@ class Article(models.Model):
 
         def __str__(self):
             return self.title
+        
+    def get_absolute_url(self):
+        return reverse('home')
+    
     
     def image_tag(self):
         return format_html(( "<img src='{}' width=100 height=75 style='border-radius: 5px;'>".format(self.image.url)))
     image_tag.short_description='عکس'
+    
+    def category_to_str(self):
+        return ". ".join([category.title for category in self.category.active() ])
+    category_to_str.short_description = 'دسته بندی'
 
     objects = ArticleManager()

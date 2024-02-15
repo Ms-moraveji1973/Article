@@ -36,7 +36,7 @@
                 <div class="col-md-10 col-lg-8 col-xl-7">
                    
                     <h2 class="section-heading">{{ article_detail.title }}</h2>
-                    <p>{{ detail.description }} </p>
+                    <p>{{ detail.description|safe }} </p>
                     <blockquote class="blockquote"></blockquote>
                         {% thumbnail detail.image "862x398" quality=75 crop='center' as im %}
                              <img src="{{ im.url }}">

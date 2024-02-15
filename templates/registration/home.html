@@ -1,4 +1,60 @@
 {% extends "registration/index.html" %}
+{% load thumbnail %}
+
 {% block title_head %} وبلاگ  {% endblock %}
 
-{% block main %} Hello World {% endblock  %}
+{% block main %} 
+
+<div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+        <!-- /.card-header -->
+        <div class="card-body table-responsive p-0">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>عنوان</th>
+                <th>نویسنده</th>
+                <th>عکس مقاله</th>
+                <th>تاریخ انتشار</th>
+                <th>توضیح کوتاه</th>
+                <th>دسته بندی</th>
+                <th>وضعیت</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for article in object_list  %}
+              <tr>
+                <td> {{ article.title }} </td>
+                <td> {{ article.auther.get_full_name }} </td>
+                <td> 
+                    {% thumbnail article.image "100x75" quality=75 crop='center' as im %}
+                        <img src="{{ im.url }}" class="thumbnail-image">
+                    {% endthumbnail %}
+                </td>
+                <td> {{ article.date }} <span class="tag tag-success"></span></td>
+                <td> {{ article.description|striptags|truncatewords:"10" }} </td>
+                <td> {{ article.category_to_str }} </td>
+                <td>
+                {% if article.status == True %}
+                   <span class=" badge badge-success">منشتر شده </span>
+                   <a target="_blank" class="badge badge-primary" href=" {% url 'ArticleDetail' slug=article.slug %}">
+                    مقاله در سایت
+                   </a> 
+                {% else %}
+                <span class=" badge badge-danger">پیش نویس </span>
+                {% endif %}
+            </td>
+        
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+    </div>
+  </div>
+{% endblock  %}

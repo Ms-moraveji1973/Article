@@ -5,7 +5,7 @@ from .models import Article , Category
 # Create your views here.
 
 class ArticleList(ListView):
-    paginate_by = 2
+    paginate_by = 4
     model = Article
     template_name = 'artilce/article_list.html'
 
