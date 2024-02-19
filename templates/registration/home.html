@@ -7,6 +7,7 @@
 
 <div class="row">
     <div class="col-12">
+      {% if object_list %}
       <div class="card">
         <div class="card-header">
         <!-- /.card-header -->
@@ -26,7 +27,13 @@
             <tbody>
             {% for article in object_list  %}
               <tr>
-                <td> {{ article.title }} </td>
+                <td> 
+                  {% if article.status == False or user.is_superuser  %}
+                  <a href="{% url 'article_update' pk=article.pk %}">{{ article.title }}</a>
+                  {% else %}
+                  {{ article.title }}
+                  {% endif %}
+                </td>
                 <td> {{ article.auther.get_full_name }} </td>
                 <td> 
                     {% thumbnail article.image "100x75" quality=75 crop='center' as im %}
@@ -38,14 +45,19 @@
                 <td> {{ article.category_to_str }} </td>
                 <td>
                 {% if article.status == True %}
-                   <span class=" badge badge-success">منشتر شده </span>
-                   <a target="_blank" class="badge badge-primary" href=" {% url 'ArticleDetail' slug=article.slug %}">
+                  <span class=" badge badge-success">منشتر شده </span>
+                  <a target="_blank" class="badge badge-primary" href=" {% url 'ArticleDetail' slug=article.slug %}">
                     مقاله در سایت
-                   </a> 
+                  </a> 
                 {% else %}
                 <span class=" badge badge-danger">پیش نویس </span>
                 {% endif %}
-            </td>
+
+                {% if user.is_superuser %}
+                <a target="_blank" class="badge text-danger" href=" {% url 'article_delete' pk=article.pk %}">
+                  delete
+                {% endif %}
+                </td>
         
               </tr>
             {% endfor %}
@@ -54,6 +66,9 @@
         </div>
         <!-- /.card-body -->
       </div>
+      {% else %}
+      <h3> محتوایی برای نمیاش وجود ندارد </h3>
+      {% endif %}
       <!-- /.card -->
     </div>
   </div>

@@ -1,6 +1,6 @@
 from django.urls import path
 from django.contrib.auth import views
-from .views import Home , ArticleCreate
+from .views import ArticleDelete, Home , ArticleCreate , ArticleUpdate , ArticleDelete
 urlpatterns = [
     path("login/", views.LoginView.as_view(), name="login"),
     path("logout/", views.LogoutView.as_view(), name="logout"),
@@ -34,4 +34,6 @@ urlpatterns = [
 urlpatterns += [
     path('home' , Home.as_view() , name='home') ,
     path('article/create' , ArticleCreate.as_view() , name="article_create" ) , 
+    path('article/update/<int:pk>' , ArticleUpdate.as_view() , name="article_update" ) , 
+    path('article/delete/<int:pk>' , ArticleDelete.as_view() , name="article_delete" ) , 
 ]
