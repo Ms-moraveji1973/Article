@@ -43,7 +43,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="{% url 'home' %}" class="nav-link">صفحه ی اصلی</a>
+        <a href="{% url 'account:home' %}" class="nav-link">صفحه ی اصلی</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="{% url 'ArticleList' %}" class="nav-link">خانه</a>
@@ -53,17 +53,18 @@
     <!-- SEARCH FORM -->
 
     <!-- Right navbar links -->
-    <ul class="navbar-nav mr-auto-navbav">
       <!-- Messages Dropdown Menu -->
       
       <!-- Logout -->
-
-      <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="{% url 'logout' %}">
-          <i class="fas fa-sign-out-alt"></i>
+<ul class="navbar-nav mr-auto-navbav">
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'account:logout' %}">
+            <i class="fas fa-sign-out-alt"></i>
+            خروج
         </a>
-      </li>
-    </ul>
+    </li>
+</ul>
+
   </nav>
   <!-- /.navbar -->
 

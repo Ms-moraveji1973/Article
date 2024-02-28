@@ -13,7 +13,7 @@
     </div>
     <div class="card-body py-4">
         <form method="post">{% csrf_token %}
-            <p p-2 > آیا از حذف مقاله مورد نظر"{{ object.title }}"  از {{ object.auther.get_full_name }} مطمئن هستید ؟  ?</p>
+            <p p-2 > آیا از حذف مقاله"{{ object.title }}"  از {{ object.auther.get_full_name }} مطمئن هستید ؟  ?</p>
             <input type="submit" value="Confirm" >
         </form>    
     </div>

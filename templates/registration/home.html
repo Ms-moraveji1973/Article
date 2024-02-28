@@ -29,7 +29,7 @@
               <tr>
                 <td> 
                   {% if article.status == False or user.is_superuser  %}
-                  <a href="{% url 'article_update' pk=article.pk %}">{{ article.title }}</a>
+                  <a href="{% url 'account:article_update' pk=article.pk %}">{{ article.title }}</a>
                   {% else %}
                   {{ article.title }}
                   {% endif %}
@@ -54,7 +54,7 @@
                 {% endif %}
 
                 {% if user.is_superuser %}
-                <a target="_blank" class="badge text-danger" href=" {% url 'article_delete' pk=article.pk %}">
+                <a target="_blank" class="badge text-danger" href=" {% url 'account:article_delete' pk=article.pk %}">
                   delete
                 {% endif %}
                 </td>
