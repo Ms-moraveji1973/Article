@@ -1,7 +1,11 @@
+from typing import Any
+from django.db.models.base import Model as Model
+from django.db.models.query import QuerySet
 from django.shortcuts import render , get_object_or_404
 from django.views.generic import View ,ListView , DetailView
 from account.models import User
 from .models import Article , Category
+from account.mixins import AuthorAccessMixin
 # Create your views here.
 
 class ArticleList(ListView):
@@ -18,9 +22,21 @@ class ArticleList(ListView):
 
 
 class ArticleDetail(DetailView):
-    model = Article
     template_name = "article/article_detail.html"
     context_object_name = 'detail'
+    def get_object(self):
+        slug = self.kwargs.get('slug')
+        return get_object_or_404(Article.objects.published(),slug=slug)
+    
+
+class ArticlePreview(AuthorAccessMixin ,DetailView):
+    template_name = "article/article_detail.html"
+    context_object_name = 'detail'
+    def get_object(self):
+        pk = self.kwargs.get('pk')
+        return get_object_or_404(Article,pk=pk)
+    
+
     
     
     

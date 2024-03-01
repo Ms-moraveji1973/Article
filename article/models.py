@@ -52,7 +52,7 @@ class Article(models.Model):
             return self.title
         
     def get_absolute_url(self):
-        return reverse('home')
+        return reverse('account:home')
     
     
     def image_tag(self):

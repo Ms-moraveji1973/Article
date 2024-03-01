@@ -46,11 +46,16 @@
                 <td>
                 {% if article.status == True %}
                   <span class=" badge badge-success">منشتر شده </span>
-                  <a target="_blank" class="badge badge-primary" href=" {% url 'ArticleDetail' slug=article.slug %}">
+                  <a target="_blank" class="badge badge-primary"
+                  href=" {% url 'ArticleDetail' slug=article.slug %}">
                     مقاله در سایت
                   </a> 
                 {% else %}
                 <span class=" badge badge-danger">پیش نویس </span>
+                <a target="_blank" class="badge badge-secondary"
+                href=" {% url 'ArticlePreview' pk=article.pk %}">
+                  پیش نمایش مقاله در سایت
+                </a> 
                 {% endif %}
 
                 {% if user.is_superuser %}

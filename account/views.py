@@ -33,4 +33,4 @@ class ArticleUpdate(AuthorAccessMixin,FormValidMixin,FieldMixin, UpdateView):
 class ArticleDelete(SuperUserMixin , DeleteView):
     model = Article
     template_name = "registration/article_delete.html"
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('account:home')

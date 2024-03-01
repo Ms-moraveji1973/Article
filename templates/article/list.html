@@ -7,7 +7,7 @@
 
 
 {% block header %}        
-    {% include "article/include/article_header.html" %}
+{% include "article/include/article_header.html" %}
 {% endblock %}
 
 {% block content %}
@@ -17,7 +17,7 @@
             {% block category_head %}{% endblock %}
             <!-- Post preview-->
 
-            {% for article in object_list %}
+            {% for article in articles %}
             <div class="post-preview">
               <a href="{% url 'ArticleDetail' article.slug %}">
                 {% thumbnail article.image "200x100" quality=75 crop='center' as im %}
@@ -27,7 +27,7 @@
                   {{article.title}}
                 </h2>
                 <h3 class="post-subtitle">
-                  {{article.description|striptags|truncatewords:30}}
+                  {{article.description|striptags|truncatewords:10}}
                 </h3>
               </a>
               <p class="post-meta">By
