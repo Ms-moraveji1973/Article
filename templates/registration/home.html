@@ -21,14 +21,16 @@
                 <th>تاریخ انتشار</th>
                 <th>توضیح کوتاه</th>
                 <th>دسته بندی</th>
+                <th>مقاله ویژه</th>
                 <th>وضعیت</th>
+
               </tr>
             </thead>
             <tbody>
             {% for article in object_list  %}
               <tr>
                 <td> 
-                  {% if article.status == False or user.is_superuser  %}
+                  {% if article.status in 'bd'|make_list or user.is_superuser  %}
                   <a href="{% url 'account:article_update' pk=article.pk %}">{{ article.title }}</a>
                   {% else %}
                   {{ article.title }}
@@ -44,18 +46,36 @@
                 <td> {{ article.description|striptags|truncatewords:"10" }} </td>
                 <td> {{ article.category_to_str }} </td>
                 <td>
-                {% if article.status == True %}
+                  {% if article.is_special  %}
+                    <i class="fa fa-check-circle" style="color:green" ></i>
+                  {% else %}
+                    <i class="fa fa-minus-circle" style="color:red" ></i>
+                  {% endif %} 
+                </td>
+                <td>
+                {% if article.status == 'p' %}
                   <span class=" badge badge-success">منشتر شده </span>
                   <a target="_blank" class="badge badge-primary"
                   href=" {% url 'ArticleDetail' slug=article.slug %}">
                     مقاله در سایت
                   </a> 
+                {% elif article.status == 'i' %}
+                  <span class=" badge badge-success"> در حال بررسی </span>
+                  {% if user.is_superuser %}
+                    <a target="_blank" class="badge badge-secondary"
+                    href=" {% url 'ArticleDetail' slug=article.slug %}">
+                  پیش نمایش در سایت
+                  {% endif %}
                 {% else %}
-                <span class=" badge badge-danger">پیش نویس </span>
-                <a target="_blank" class="badge badge-secondary"
-                href=" {% url 'ArticlePreview' pk=article.pk %}">
-                  پیش نمایش مقاله در سایت
-                </a> 
+                  {% if article.status == 'd' %}
+                    <span class=" badge badge-danger">پیش نویس </span>
+                    {% else %}
+                        <span class=" badge badge-warning">برگشت خورده</span>
+                  {% endif %}
+                    <a target="_blank" class="badge badge-secondary"
+                    href=" {% url 'ArticlePreview' pk=article.pk %}">
+                    پیش نمایش مقاله در سایت
+                    </a>
                 {% endif %}
 
                 {% if user.is_superuser %}

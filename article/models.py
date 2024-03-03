@@ -7,7 +7,7 @@ from django.utils.html import format_html
 
 class ArticleManager(models.Manager):
     def published(self):
-        return self.filter(status=True)
+        return self.filter(status='p')
 
 
 class CatagoryManager(models.Manager):
@@ -32,12 +32,19 @@ class Category(models.Model):
     objects = CatagoryManager()
 
 class Article(models.Model):
+    STATUS_CHOICES = (
+		('d', 'پیش‌نویس'),		 # draft
+		('p', "منتشر شده"),		 # publish
+		('i', "در حال بررسی"),	 # investigation
+		('b', "برگشت داده شده"), # back
+	)
     title = models.CharField(max_length=250 , verbose_name='عنوان مقاله')
     slug = models.SlugField(max_length=400 , db_index=True ,allow_unicode=True , verbose_name='ادرس مقاله')
     category = models.ManyToManyField(Category , verbose_name="دسته بندی مقاله", related_name="articles_cat")
     description = models.TextField(verbose_name='توضیح مقاله')
     image = models.ImageField(upload_to='articles')
-    status = models.BooleanField(default=True , verbose_name='قعال / غیر فعال')
+    status = models.CharField(max_length=1, choices=STATUS_CHOICES, verbose_name="وضعیت")
+    is_special = models.BooleanField(default=False , verbose_name="مقالات ویژه")
     date = models.DateTimeField(auto_now_add=True , editable=False , verbose_name='تاریخ ایجاد مقاله')
     auther = models.ForeignKey(User , on_delete=models.CASCADE ,null=True, related_name="articles_cat" , verbose_name='نویسنده')
 
