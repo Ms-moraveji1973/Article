@@ -2,7 +2,7 @@ from django.db.models.base import Model as Model
 from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.urls import reverse_lazy
-
+from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from article.models import Article
@@ -51,7 +51,7 @@ class ArticleDelete(SuperUserMixin , DeleteView):
     success_url = reverse_lazy('account:home')
     
     
-class Profile(UpdateView):
+class Profile(LoginRequiredMixin ,UpdateView):
     model = User
     template_name = "registration/profile.html"
     form_class = ProfileForm
@@ -66,3 +66,12 @@ class Profile(UpdateView):
             'user' : self.request.user
         })
         return kwargs
+    
+class Login(LoginView):
+    def get_success_url(self):
+        user = self.request.user
+        
+        if user.is_superuser :
+            return reverse_lazy("account:home")
+        else :
+            return reverse_lazy("account:profile")

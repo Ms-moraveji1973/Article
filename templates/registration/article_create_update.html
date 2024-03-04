@@ -32,10 +32,12 @@
             <div class="col-6">
                 {{ form.image|as_crispy_field }}
             </div>
+            <div class="col-6" >
+            {{ form.is_special|as_crispy_field }}
+            </div>
             {% if user.is_superuser %}
                 <div class="col-6">
                     {{ form.auther|as_crispy_field }}
-                    {{ form.is_special|as_crispy_field }}
                 </div>
                 <div class="col-6">
                     {{ form.status|as_crispy_field }}
