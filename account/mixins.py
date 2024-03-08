@@ -1,20 +1,15 @@
 from django.http import Http404
-from django.shortcuts import get_list_or_404, get_object_or_404
+from django.shortcuts import get_list_or_404, get_object_or_404 , redirect
 from article.models import Article
+
 class FieldMixin():
     def dispatch(self , request , *args , **kwargs):
-        if request.user.is_superuser:
-            self.fields = [
+        self.fields = [
                 'title','slug' ,'category' ,'description'
-                ,'image','is_special' ,'status' ,'auther'
-                          ]
-        elif request.user.is_author:
-            self.fields = [
-                'title','slug' ,'category'
-                ,'description','is_special','image'
-                ]
-        else :
-            raise Http404("You can't see this page")
+                ,'image','is_special' ,'status'
+                    ]
+        if request.user.is_superuser :
+            self.fields.append("auther")
         return super().dispatch(request , *args , **kwargs)
 
 class FormValidMixin():
@@ -24,7 +19,8 @@ class FormValidMixin():
         else :
             self.obj = form.save(commit=False)
             self.obj.auther = self.request.user
-            self.obj.status = 'd'
+            if not self.obj.status == "i":
+                self.obj.status == "d"
         return super().form_valid(form)
 
 
@@ -36,7 +32,15 @@ class AuthorAccessMixin():
         else :
             raise Http404("You can't see this page")
         
-
+class AuthorsAccessMixin():
+    def dispatch(self , request, *args , **kwargs):
+        if request.user.is_authenticated :
+            if request.user.is_superuser or request.user.is_author :
+                return super().dispatch(request , *args , **kwargs)
+            else :
+                return redirect("account:profile")
+        else :
+            return redirect("account:login")
 class SuperUserMixin():
     def dispatch(self , request,*args , **kwargs):
         if request.user.is_superuser:

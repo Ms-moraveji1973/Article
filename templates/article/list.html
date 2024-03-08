@@ -25,7 +25,11 @@
                 {% endthumbnail %}
                 <h2 class="post-title">
                   {{article.title}}
+                  {% if article.is_special %}
+                    <span class="badge badge-danger" style="color: brown;">ویژه</span>                  
+                  {% endif %}
                 </h2>
+
                 <h3 class="post-subtitle">
                   {{article.description|striptags|truncatewords:10}}
                 </h3>

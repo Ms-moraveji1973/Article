@@ -41,7 +41,18 @@
                 </div>
                 <div class="col-6">
                     {{ form.status|as_crispy_field }}
-                </div>            
+                </div> 
+            {% else %}
+                <div id="div_id_status" class="form-group">
+                    <label for="id_status" class="requiredField"> وضعیت<span class="asteriskField">*</span> </label>
+                    <div>
+                        <select name="status" class="select form-control" required="" id="id_status">
+                            <option value="">---------</option>
+                            <option value="p">Publush</option>
+                            <option value="i">ارسال برای ادمین</option>
+                        </select>
+                    </div>
+                </div>
             {% endif %}
         </div>
             <button class="btn btn-success" type="submit" >ارسال</button>

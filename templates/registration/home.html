@@ -60,7 +60,7 @@
                     مقاله در سایت
                   </a> 
                 {% elif article.status == 'i' %}
-                  <span class=" badge badge-success"> در حال بررسی </span>
+                  <span class=" badge badge-success" style="background-color:brown"> در حال بررسی </span>
                   {% if user.is_superuser %}
                     <a target="_blank" class="badge badge-secondary"
                     href=" {% url 'ArticleDetail' slug=article.slug %}">

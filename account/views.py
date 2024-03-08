@@ -19,7 +19,8 @@ from .mixins import(
     FieldMixin ,
     FormValidMixin,
     AuthorAccessMixin,
-    SuperUserMixin
+    SuperUserMixin,
+    AuthorsAccessMixin,
     )
 
 # Create your views here.
@@ -28,7 +29,7 @@ def home(request):
     return render(request ,"registration/home.html")
 
 
-class Home(LoginRequiredMixin,ListView):
+class Home(AuthorsAccessMixin,ListView):
     template_name = "registration/home.html"
     
     def get_queryset(self):
@@ -37,7 +38,7 @@ class Home(LoginRequiredMixin,ListView):
         else:
             return Article.objects.filter(auther=self.request.user)
 
-class ArticleCreate(LoginRequiredMixin,FormValidMixin,FieldMixin, CreateView):
+class ArticleCreate(AuthorsAccessMixin,FormValidMixin,FieldMixin, CreateView):
     model = Article
     template_name = "registration/article_create_update.html"
     

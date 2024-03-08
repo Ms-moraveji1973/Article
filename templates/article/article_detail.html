@@ -11,10 +11,14 @@
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <div class="site-heading">
-                        <h1>{{ detail.title }}</h1>
+                        <h1>{{ detail.title }}
+                            {% if detail.is_special %}
+                            <span class="badge badge-danger" style="color: brown;">ویژه</span>
+                            {% endif %}
+                        </h1>
                         <span class="meta">
                             Posted by
-                            <a href="">{{ detail.auther }}</a>
+                            <a href="" style="color: chartreuse;">{{ detail.auther }}</a>
                             <br>
                            <time>{{ detail.date }} </time>
                         </span>                    
@@ -40,8 +44,8 @@
                         {% if user.is_authenticated and user.is_special or user == detail.auther or user.is_superuser %}
                             <p>{{ detail.description|safe }} </p>
                         {% else %}
-                            <p>را خریداری نمایید این مقاله در دسته بندی مقالات ویژه است برای دیدن و مشاهده کردن آن می بایست<a href="#">اشتراک ویژه </a></p>
-                        {% endif %}
+                            {{ detail.description|striptags|truncatewords:10}}
+                            <p>را خریداری نمایید. این مقاله در دسته بندی مقالات ویژه قرار دارد. برای دیدن و مشاهده آن می‌بایست <a href="#">اشتراک ویژه</a> را بخرید.</p>                        {% endif %}
                     {% else %}
                     <p>{{ detail.description|safe }} </p>
                     {% endif %}
