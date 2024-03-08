@@ -40,7 +40,7 @@ class AuthorsAccessMixin():
             else :
                 return redirect("account:profile")
         else :
-            return redirect("account:login")
+            return redirect("login")
 class SuperUserMixin():
     def dispatch(self , request,*args , **kwargs):
         if request.user.is_superuser:
