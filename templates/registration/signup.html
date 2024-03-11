@@ -5,9 +5,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ورود</title>
+    <title>ساخت حساب </title>
     <!-- اضافه کردن فایل CSS -->
-    <link rel="stylesheet" href="{% static 'css/registration/login/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/registration/login/signup.css' %}">
+
 
     <style>
         .errors{
@@ -32,9 +33,10 @@
             <div class="circle circle-one"></div>
             <div class="form-container">
                 <img src="https://raw.githubusercontent.com/hicodersofficial/glassmorphism-login-form/master/assets/illustration.png" alt="illustration" class="illustration" />
-                <h1 class="opacity">ورود به حساب کاربری</h1>
+                <h1 class="opacity">وساخت حساب </h1>
                 <form method="post">
                     {% csrf_token %}
+                      <div class="form-row" >
                     <label for="username">نام کاربری:</label>
                     {{ form.username|add_class:"input100" }}
                         {% if form.username.errors %}
@@ -44,22 +46,41 @@
                             {% endfor %}
                         </div>
                         {% endif %}
+                      </div>
 
-                    <label for="password">رمز عبور:</label>
-                    {{ form.password|add_class:"input100" }}
-                        {% if form.password.errors %}
+                     <label for="email">ایمیل</label>
+                    {{ form.email|add_class:"input100" }}
+                        {% if form.email.errors %}
                         <div class="errors">
-                            {% for error in form.password.errors  %}
+                            {% for error in form.email.errors  %}
+                                <span>{{ error }} </span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    <label for="password">رمز عبور:</label>
+                    {{ form.password1|add_class:"input100" }}
+                        {% if form.password1.errors %}
+                        <div class="errors">
+                            {% for error in form.password1.errors  %}
                                 <span>{{ error }} </span>
                             {% endfor %}
                         </div>
                         {% endif %}
 
+                    <label for="password">تکرار رمز عبور:</label>
+                    {{ form.password2|add_class:"input100" }}
+                        {% if form.password2.errors %}
+                        <div class="errors">
+                            {% for error in form.password2.errors  %}
+                                <span>{{ error }} </span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
                     <button class="opacity">ارسال</button>
                 </form>
                 <div class="register-forget opacity">
-                    <a href="{% url 'signup' %}">ایجاد حساب</a>
-                    <a href="{% url 'password_reset' %}">فراموش رمز عبور</a>
+                    <a href="{% url 'login' %}">اگر حساب دارید کلیلک کنید</a>
+                    <a href="{% url 'password_reset' %}">فراموشی رمز عبور</a>
                 </div>
             </div>
             <div class="circle circle-two"></div>

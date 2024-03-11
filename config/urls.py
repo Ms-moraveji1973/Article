@@ -15,16 +15,21 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path , include
+from django.urls import path ,re_path , include 
 from django.conf.urls.static import static
 from django.conf import settings
-from account.views import Login
+from account.views import Login ,Signup, signup ,activate
 
 
 urlpatterns = [
     path('' , include('article.urls')),
+    #login and forgar password user
     path('' , include('django.contrib.auth.urls')),
     path("login/", Login.as_view(), name="login"),
+    #signup user
+    path("signup/", Signup.as_view(), name='signup'),
+    path('activate/(?P<uidb64>[0-9A-Za-z_\\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', activate, name='activate'),
+    #----#
     path('account/' , include('account.urls')),
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL , document_root=settings.MEDIA_ROOT)
