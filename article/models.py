@@ -2,6 +2,8 @@ from django.db import models
 from django.urls import reverse
 from account.models import User
 from django.utils.html import format_html
+from django.contrib.contenttypes.fields import GenericRelation
+from comment.models import Comment
 
 # Create your models here.
 
@@ -47,7 +49,7 @@ class Article(models.Model):
     is_special = models.BooleanField(default=False , verbose_name="مقالات ویژه")
     date = models.DateTimeField(auto_now_add=True , editable=False , verbose_name='تاریخ ایجاد مقاله')
     auther = models.ForeignKey(User , on_delete=models.CASCADE ,null=True, related_name="articles_cat" , verbose_name='نویسنده')
-
+    comments = GenericRelation(Comment)
 
     class Meta:
         verbose_name = ' مقاله'

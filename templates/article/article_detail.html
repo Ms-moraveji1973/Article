@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load comment_tags %}  {# Loading the template tag #}
 {% load thumbnail %}
 
 {% block title %} Article Detail {% endblock %}
@@ -48,7 +49,11 @@
                             <p>را خریداری نمایید. این مقاله در دسته بندی مقالات ویژه قرار دارد. برای دیدن و مشاهده آن می‌بایست <a href="#">اشتراک ویژه</a> را بخرید.</p>                        {% endif %}
                     {% else %}
                     <p>{{ detail.description|safe }} </p>
+                    
                     {% endif %}
+                    {% render_comments detail request %}  {# Render all the comments belong to the passed object "obj" #}
+                    {% include_bootstrap %} {# Include bootstrap 4.1.1 - remove this line if BS is already used in your project #}
+
                     <blockquote class="blockquote"></blockquote>
                     {% comment %}
                         {% thumbnail detail.image "862x398" quality=75 crop='center' as im %}

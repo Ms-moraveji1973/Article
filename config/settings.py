@@ -45,12 +45,14 @@ INSTALLED_APPS = [
     'account',
 
     
-    #internal apps
+    #external apps
     'article.templatetags',
     'sorl.thumbnail',
     'widget_tweaks',
     'crispy_forms',
     'crispy_bootstrap4',
+    'django_gravatar',
+    'comment',
 
 
 ]
@@ -155,6 +157,8 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 AUTH_USER_MODEL =  "account.User"
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 EMAIL_USE_TLS = True
 EMAIL_PORT=587
 EMAIL_HOST='smtp.gmail.com'

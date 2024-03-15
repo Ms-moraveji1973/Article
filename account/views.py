@@ -6,9 +6,20 @@ from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView ,PasswordChangeView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpRequest, HttpResponse
+from django.shortcuts import render, redirect
+from django.contrib.auth import login, authenticate
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.encoding import force_bytes 
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.template.loader import render_to_string
+from .tokens import account_activation_token
+from django.core.mail import EmailMessage
 from article.models import Article
 from .models import User
+from .forms import SignupForm
 from .forms import ProfileForm
+
 from django.views.generic import (
     ListView ,
     CreateView,
@@ -78,24 +89,8 @@ class Login(LoginView):
         else :
             return reverse_lazy("account:profile")
         
-        
-        
+                
 
-
-
-
-
-        
-from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
-from .forms import SignupForm
-from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_bytes 
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.template.loader import render_to_string
-from .tokens import account_activation_token
-from django.core.mail import EmailMessage
 
 def signup(request):
     if request.method == 'POST':
@@ -143,7 +138,7 @@ class Signup(CreateView):
                     mail_subject, message, to=[to_email]
         )
         email.send()
-        return HttpResponse('Please confirm your email address to complete the registration')
+        return HttpResponse('ایمیل خود را برای فعالسازی حساب بررسی کنید.')
     
 def activate(request, uidb64, token):
     try:
@@ -156,6 +151,10 @@ def activate(request, uidb64, token):
         user.save()
         login(request, user)
         # return redirect('home')
-        return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
+        return HttpResponse('حساب شما با موفقیت فعال شد لطفا برای ادامه کلیک کنید.{% url "login" %}')
     else:
         return HttpResponse('Activation link is invalid!')
+    
+    
+    
+    
