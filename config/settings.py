@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap4',
     'django_gravatar',
     'comment',
+    'star_ratings',
 
 
 ]
@@ -164,3 +165,6 @@ EMAIL_PORT=587
 EMAIL_HOST='smtp.gmail.com'
 EMAIL_HOST_USER='potato1973admi@gmail.com'
 EMAIL_HOST_PASSWORD = 'wqfsjkdgpllqcfmb'
+
+#setting for ratign
+STAR_RATINGS_STAR_HEIGHT = 20

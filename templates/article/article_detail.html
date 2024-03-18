@@ -2,6 +2,7 @@
 {% load static %}
 {% load comment_tags %}  {# Loading the template tag #}
 {% load thumbnail %}
+{% load ratings %}
 
 {% block title %} Article Detail {% endblock %}
 
@@ -22,7 +23,9 @@
                             <a href="" style="color: chartreuse;">{{ detail.auther }}</a>
                             <br>
                            <time>{{ detail.date }} </time>
-                        </span>                    
+                        </span>
+                        <br>
+                        {% ratings detail %}
                     </div>
                 </div>
             </div>
