@@ -17,7 +17,7 @@
             {% block category_head %}{% endblock %}
             <!-- Post preview-->
 
-            {% for article in articles %}
+            {% for article in object_list %}
             <div class="post-preview">
               <a href="{% url 'ArticleDetail' article.slug %}">
                 {% thumbnail article.image "200x100" quality=75 crop='center' as im %}
@@ -35,15 +35,17 @@
                 </h3>
               </a>
               <p class="post-meta">By
-                <a href="{% url 'author' username=article.auther %}">{{ article.auther }}</a>
+                <a href="{% url 'author' article.auther %}">{{ article.auther }}</a>
                 {{article.date}}</p>
               <div>
                 {% for cat in article.category.active %}
-                  <a href="{% url 'category' cat.slug %}">#{{cat.title}}</a>
+                  <a href="{% url 'category' cat.slug %}">{{cat.title}}</a>
                 {% endfor %}
               </div>            
             </div>
             <hr>
+          {% empty %}
+          ): محتوایی برای نمایش وجود ندارد
           {% endfor %}
   
   

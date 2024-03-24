@@ -6,6 +6,7 @@ from django.views.generic import View ,ListView , DetailView
 from account.models import User
 from .models import Article , Category
 from account.mixins import AuthorAccessMixin
+from django.db.models import Q
 # Create your views here.
 
 class ArticleList(ListView):
@@ -77,5 +78,19 @@ class AuthorList(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['author'] = author
+        return context
+
+
+class SearchList(ListView):
+    paginate_by = 2
+    template_name = "article/search_list.html"
+        
+    def get_queryset(self):
+        search = self.request.GET.get('q')
+        return Article.objects.published().filter(Q(description__icontains=search) | Q(title__icontains=search) )
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['search'] = self.request.GET.get('q')
         return context
         

@@ -4,7 +4,9 @@ from .views import(
         ArticleDetail ,
         ArticlePreview,
         CategoryList  ,
-        AuthorList    )
+        AuthorList ,
+        SearchList
+                    )
 
 urlpatterns = [
     path('' , ArticleList.as_view() , name="ArticleList" ) , 
@@ -12,4 +14,7 @@ urlpatterns = [
     path('preview/<int:pk>' , ArticlePreview.as_view() , name="ArticlePreview" ),
     path('category/<slug:slug>', CategoryList.as_view() , name="category"),
     path('author/<slug:username>', AuthorList.as_view() , name="author"),
+    #path('author/<slug:username>/page/<int:page>', AuthorList.as_view() , name="author"),
+	path('search/', SearchList.as_view(), name="search"),
+    path('search/<slug:username>/page/<int:page>', SearchList.as_view() , name="search"),
 ]

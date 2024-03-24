@@ -21,4 +21,10 @@
             {% endif %}
         {% endfor %}
     </ul>
+        <form class="search-form" action="{% url 'search' %}">
+            <input type="text" name="q" class="form-control" placeholder="جست و جوی متن" >
+            <button class="btn btn-success" >
+                جست و جو  :
+            </button>
+        </form>
 </div>

@@ -1,3 +1,4 @@
+
 from django.db import models
 from django.urls import reverse
 from account.models import User
@@ -33,6 +34,7 @@ class Category(models.Model):
     
     objects = CatagoryManager()
 
+
 class Article(models.Model):
     STATUS_CHOICES = (
 		('d', 'پیش‌نویس'),		 # draft
@@ -50,7 +52,6 @@ class Article(models.Model):
     date = models.DateTimeField(auto_now_add=True , editable=False , verbose_name='تاریخ ایجاد مقاله')
     auther = models.ForeignKey(User , on_delete=models.CASCADE ,null=True, related_name="articles_cat" , verbose_name='نویسنده')
     comments = GenericRelation(Comment)
-
     class Meta:
         verbose_name = ' مقاله'
         verbose_name_plural = 'مقاله ها'
