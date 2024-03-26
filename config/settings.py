@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'django_gravatar',
     'comment',
     'star_ratings',
+    'hitcount',
 
 
 ]
@@ -157,6 +158,7 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 AUTH_USER_MODEL =  "account.User"
 
+#SETTING FOR EMAIL_BACKEND
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 

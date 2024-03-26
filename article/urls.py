@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path , include
 from .views import( 
         ArticleList   ,
         ArticleDetail ,
@@ -17,4 +17,5 @@ urlpatterns = [
     #path('author/<slug:username>/page/<int:page>', AuthorList.as_view() , name="author"),
 	path('search/', SearchList.as_view(), name="search"),
     path('search/<slug:username>/page/<int:page>', SearchList.as_view() , name="search"),
+    path('hitcount/', include(('hitcount.urls', 'hitcount'), namespace='hitcount')),
 ]

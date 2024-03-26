@@ -3,6 +3,7 @@
 {% load comment_tags %}  {# Loading the template tag #}
 {% load thumbnail %}
 {% load ratings %}
+{% load hitcount_tags %}
 
 {% block title %} Article Detail {% endblock %}
 
@@ -19,10 +20,12 @@
                             {% endif %}
                         </h1>
                         <span class="meta">
-                            Posted by
-                            <a href="" style="color: chartreuse;">{{ detail.auther }}</a>
+                            نوشته شده توسط:
+                            <a href="" style="color: chartreuse;">{{ detail.auther.get_full_name }}</a>
                             <br>
                            <time>{{ detail.date }} </time>
+                           <p> تعداد بازدید : {% get_hit_count for detail %} </p>
+
                         </span>
                         <br>
                         {% ratings detail %}
@@ -32,6 +35,7 @@
         </div>
     </header>
 {% endwith %}
+
 
 
 {% endblock header %}

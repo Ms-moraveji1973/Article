@@ -3,10 +3,11 @@ from django.db.models.base import Model as Model
 from django.db.models.query import QuerySet
 from django.shortcuts import render , get_object_or_404
 from django.views.generic import View ,ListView , DetailView
+from django.db.models import Q
+from hitcount.views import HitCountDetailView
 from account.models import User
 from .models import Article , Category
 from account.mixins import AuthorAccessMixin
-from django.db.models import Q
 # Create your views here.
 
 class ArticleList(ListView):
@@ -22,12 +23,15 @@ class ArticleList(ListView):
 
 
 
-class ArticleDetail(DetailView):
+class ArticleDetail(HitCountDetailView):
     template_name = "article/article_detail.html"
     context_object_name = 'detail'
+    count_hit = True
+    
     def get_object(self):
         slug = self.kwargs.get('slug')
         return get_object_or_404(Article.objects.published(),slug=slug)
+    
     
 
 class ArticlePreview(AuthorAccessMixin ,DetailView):

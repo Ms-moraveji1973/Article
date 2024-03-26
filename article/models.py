@@ -4,6 +4,7 @@ from django.urls import reverse
 from account.models import User
 from django.utils.html import format_html
 from django.contrib.contenttypes.fields import GenericRelation
+from hitcount.models import HitCountMixin, HitCount
 from comment.models import Comment
 
 # Create your models here.
@@ -52,6 +53,8 @@ class Article(models.Model):
     date = models.DateTimeField(auto_now_add=True , editable=False , verbose_name='تاریخ ایجاد مقاله')
     auther = models.ForeignKey(User , on_delete=models.CASCADE ,null=True, related_name="articles_cat" , verbose_name='نویسنده')
     comments = GenericRelation(Comment)
+    hit_count_generic = GenericRelation(HitCount, object_id_field='object_pk',
+     related_query_name='hit_count_generic_relation')
     class Meta:
         verbose_name = ' مقاله'
         verbose_name_plural = 'مقاله ها'
