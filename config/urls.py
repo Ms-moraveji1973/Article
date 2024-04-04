@@ -28,7 +28,8 @@ urlpatterns = [
     path("login/", Login.as_view(), name="login"),
     #signup user
     path("signup/", Signup.as_view(), name='signup'),
-    path('activate/(?P<uidb64>[0-9A-Za-z_\\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', activate, name='activate'),
+    #path('activate/(?P<uidb64>[0-9A-Za-z_\\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', activate, name='activate'),
+    path('activate/<str:uidb64>/<str:token>/', activate, name='activate'),
     #----#
     path('ratings/', include('star_ratings.urls', namespace='ratings')),
     path('account/' , include('account.urls')),
